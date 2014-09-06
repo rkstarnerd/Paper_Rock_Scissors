@@ -8,59 +8,41 @@ def play_again(arg)
   end
 end
 
-
 def play_rps
+  options = { 'P' => 'Paper', 'R' => 'Rock', 'S' => 'Scissors' }
 
   puts "Play Rock, Paper, Scissors!\n Choose one: (P/R/S)"
 
   player = gets.chomp.upcase
 
-    until ['P', 'R', 'S'].include? player
+    until options.has_key? player
       puts "Please choose one of the following: (P/R/S)"
       player = gets.chomp.upcase
     end
 
-  computer = ['P', 'R', 'S'].sample
+  computer = options.keys.sample
 
-  options = { 'P' => 'Paper', 'R' => 'Rock', 'S' => 'Scissors' }
+  puts "You chose #{options[player]}. The computer chose #{options[computer]}."
 
-  puts "You chose #{options[player]} and the computer chose #{options[computer]}."
-
-  if player.upcase == computer.upcase
+  if player.upcase == computer
     puts "You tied!"
-    puts "Play again? (Y/N)"
-    arg = gets.chomp
-    play_again(arg)
-  elsif ((player.upcase == 'P') && (computer.upcase == 'R'))
-    puts "Paper Wraps Rock!"
-    puts "You won!\nPlay again? (Y/N)"
-    arg = gets.chomp
-    play_again(arg)
-  elsif (player.upcase == 'P') && (computer.upcase == 'S')
-    puts "Scissors cut Paper!"
-    puts "Womp! You lost!\nPlay again? (Y/N)"
-    arg = gets.chomp
-    play_again(arg)
-  elsif (player.upcase == 'R') && (computer.upcase == 'P')
-    puts "Paper Wraps Rock!"
-    puts "Womp! You lost!\nPlay again? (Y/N)"
-    arg = gets.chomp
-    play_again(arg)
-  elsif (player.upcase == 'R') && (computer.upcase == 'S')
-    puts "Rock Crushes Scissors!\n You won!\nPlay again? (Y/N)"
-    arg = gets.chomp
-    play_again(arg)
-  elsif (player.upcase == 'S') && (computer.upcase == 'P')
-    puts "Scissors Cut Paper!"
-    puts "You won!\nPlay again? (Y/N)"
-    arg = gets.chomp
-    play_again(arg)
-  elsif (player.upcase == 'S') && (computer.upcase == 'R')
-    puts "Rock Crushes Scissors!"
-    puts "Womp! You lost!\nPlay again? (Y/N)"
-    arg = gets.chomp
-    play_again(arg)
+  elsif (player.upcase == 'P') && (computer == 'R')
+    puts "Paper Wraps Rock!\n You won!"
+  elsif (player.upcase == 'P') && (computer == 'S')
+    puts "Scissors cut Paper!\n Womp! You lost!"
+  elsif (player.upcase == 'R') && (computer == 'P')
+    puts "Paper Wraps Rock!\n Womp! You lost!"
+  elsif (player.upcase == 'R') && (computer == 'S')
+    puts "Rock Crushes Scissors!\n You won!"
+  elsif (player.upcase == 'S') && (computer == 'P')
+    puts "Scissors Cut Paper!\n You won!"
+  elsif (player.upcase == 'S') && (computer == 'R')
+    puts "Rock Crushes Scissors!\n Womp! You lost!"
   end
+
+  puts "Play again? (Y/N)"
+  arg = gets.chomp
+  play_again(arg)
 end
 
 play_rps
